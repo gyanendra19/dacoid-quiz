@@ -5,8 +5,8 @@ const DB_NAME = "QuizDB";
 const STORE_NAME = "attempts";
 
 interface StoredAttempts {
-    id: number,
-    attempts: AttemptsProp[]
+  id: number;
+  attempts: AttemptsProp[];
 }
 
 // Initialize Database
@@ -14,7 +14,10 @@ const initDB = async () => {
   return openDB(DB_NAME, 1, {
     upgrade(db) {
       if (!db.objectStoreNames.contains(STORE_NAME)) {
-        db.createObjectStore(STORE_NAME); 
+        db.createObjectStore(STORE_NAME, {
+          keyPath: "id",
+          autoIncrement: true,
+        });
       }
     },
   });
@@ -24,7 +27,7 @@ const initDB = async () => {
 export const saveAttempt = async (id: number, attempts: AttemptsProp[]) => {
   const db = await initDB();
   const attempt = { id, attempts };
-  console.log("Saving:", attempt); 
+  console.log("Saving:", attempt);
 
   await db.put(STORE_NAME, attempt);
 };

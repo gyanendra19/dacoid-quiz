@@ -25,7 +25,7 @@ const Questions = ({
   useEffect(() => {
     if (timer === 0) {
       setIndex(index + 1);
-      handleOptionSelect("Not answered");
+      handleOptionSelect(selectedOption || integerAnswer || "Not answered");
       return;
     }
 
