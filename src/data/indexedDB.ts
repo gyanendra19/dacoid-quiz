@@ -16,7 +16,6 @@ const initDB = async () => {
       if (!db.objectStoreNames.contains(STORE_NAME)) {
         db.createObjectStore(STORE_NAME, {
           keyPath: "id",
-          autoIncrement: true,
         });
       }
     },
